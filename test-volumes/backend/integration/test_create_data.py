@@ -29,7 +29,9 @@ def sut():
     # mockedValidators.getValidator.return_value = validator
     with patch('src.util.dao.getValidator', return_value = validator):
         sut = DAO("test")
-    return sut
+    # return sut
+    yield sut
+    sut.drop()
 
 @pytest.mark.integration
 def test_valid_data(sut):
