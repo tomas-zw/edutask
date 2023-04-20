@@ -3,6 +3,8 @@ from unittest.mock import patch
 
 from src.util.dao import DAO
 
+
+
 validator = {
     "$jsonSchema": {
         "bsonType": "object",
@@ -20,16 +22,17 @@ validator = {
     }
 }
 
-# this is in test-volumes
-# another test
 @pytest.fixture
-@patch ('src.util.validators', autospec=True)
-def sut(mockedValidators):
-    mockedValidators.getValidator.return_value = validator
-    sut = DAO("test")
+# @patch ('src.util.validators', autospec=True)
+# def sut(mockedValidators):
+def sut():
+    # mockedValidators.getValidator.return_value = validator
+    with patch('src.util.dao.getValidator', return_value = validator):
+        sut = DAO("test")
     return sut
 
-@pytest.mark.lab1
+@pytest.mark.integration
 def test_valid_data(sut):
     result = sut.create({"description": "a string", "done": True})
+    print(result)
     assert "_id" in result
