@@ -39,6 +39,7 @@ def sut():
     """"Fixture for the integration tests"""""
     with patch('src.util.dao.getValidator', return_value = validator):
         sut = DAO("test")
+    # return sut
     yield sut
     sut.drop()
 
