@@ -98,6 +98,8 @@ describe("TODO tests", () => {
 
   it("R8UC3 deletes item", () => {
     // Find and click the remover
+    // Click the task
+    cy.contains("div", "Task").click();
     cy.contains(".popup-inner .todo-item", "Watch video")
       .find(".remover")
       .click({ force: true });
