@@ -44,28 +44,28 @@ describe("TODO tests", () => {
     // Click on task
     cy.contains("div", "Task").click();
     // Check add button is disabled
-    cy.get(".popup-inner").find("input[type=submit]").should("be.disabled");
+    cy.contains("div", "Watch video")
+      .find("input[type=submit]")
+      .should("be.disabled");
   });
 
   it("R8UC1 adds todo item", () => {
     // Click on task
     cy.contains("div", "Task").click();
     // Add todo
-    cy.get(".popup-inner").find("input[type=text]").type("My todo");
-    cy.get(".popup-inner").find("input[type=submit]").click();
+    cy.contains("div", "Watch video").find("input[type=text]").type("My todo");
+    cy.contains("div", "Watch video").find("input[type=submit]").click();
     // Check that todo was added
-    cy.get(".todo-list").should("contain.text", "My todo");
+    cy.contains("div", "Watch video").should("contain.text", "My todo");
   });
 
   it("R8UC2 sets item to done", () => {
     // Click on task
     cy.contains("div", "Task").click();
     // Find the checkbox and click it
-    cy.contains(".popup-inner .todo-item", "Watch video")
-      .find(".checker")
-      .click();
+    cy.contains("div", "Watch video").find(".checker").click();
     // Check that text is struck through
-    cy.contains(".popup-inner .todo-item", "Watch video")
+    cy.contains("li", "Watch video")
       .find(".editable")
       .invoke("css", "text-decoration")
       .should("include", "line-through");
@@ -86,11 +86,9 @@ describe("TODO tests", () => {
     // Click the task
     cy.contains("div", "Task").click();
     // Find and click the checker
-    cy.contains(".popup-inner .todo-item", "Watch video")
-      .find(".checker")
-      .click();
+    cy.contains("div", "Watch video").find(".checker").click();
     // Check that text is not struck through
-    cy.contains(".popup-inner .todo-item", "Watch video")
+    cy.contains("li", "Watch video")
       .find(".editable")
       .invoke("css", "text-decoration")
       .should("not.include", "line-through");
@@ -100,11 +98,9 @@ describe("TODO tests", () => {
     // Find and click the remover
     // Click the task
     cy.contains("div", "Task").click();
-    cy.contains(".popup-inner .todo-item", "Watch video")
-      .find(".remover")
-      .click({ force: true });
+    cy.contains("div", "Watch video").find(".remover").click({ force: true });
     // Check that todo is removed
-    cy.contains(".popup-inner .todo-item", "Watch video").should("not.exist");
+    cy.contains("div", "Watch video").should("not.exist");
   });
 
   // Remove the user and tasks
